@@ -1,0 +1,41 @@
+.about-header {
+  background: linear-gradient(135deg, #2e1065, #5d2280);
+}
+
+.about-merkez p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.bio-card {
+  background: #f8fafc;
+  padding: 30px;
+  border-radius: 15px;
+  border-left: 4px solid var(--secondary-color);
+}
+
+.bio-card h3 {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.custom-list {
+  padding-left: 20px;
+}
+
+.custom-list li {
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.source-note {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-top: 30px;
+}
+
+/* Contraste insuffisant : #94a3b8 sur fond blanc = 2.8:1 (min. 4.5:1) */
+.source-note {
+  color: var(--light-text);
+}

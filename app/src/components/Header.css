@@ -1,0 +1,344 @@
+/* En-tête fixe qui s'escamote vers le haut quand on descend dans la
+   page, et réapparaît dès qu'on remonte. */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--white);
+  box-shadow: 0 2px 20px rgba(46, 16, 101, 0.09);
+  transition: transform 0.35s ease;
+}
+
+/* Escamotage : on translate de toute la hauteur de l'en-tête. */
+.header.is-hidden {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header {
+    transition: none;
+  }
+}
+
+/* Lien d'évitement clavier (accessibilité) */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--primary-color);
+  color: #fff;
+  padding: 12px 20px;
+  z-index: 1100;
+  border-radius: 0 0 8px 0;
+}
+
+.skip-link:focus {
+  left: 0;
+  color: #fff;
+}
+
+/* ---------- Bandeau d'annonce ---------- */
+.top-bar {
+  width: 100%;
+  height: 44px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: rgba(46, 16, 101, 0.94);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.top-bar .marquee {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  animation: defilement 30s linear infinite;
+}
+
+.top-bar:hover .marquee,
+.top-bar:focus-within .marquee {
+  animation-play-state: paused;
+}
+
+@keyframes defilement {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* Respect de la préférence système « moins d'animations » */
+@media (prefers-reduced-motion: reduce) {
+  .top-bar .marquee {
+    animation: none;
+    padding-left: 0;
+    white-space: normal;
+    text-align: center;
+    width: 100%;
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  .top-bar {
+    height: auto;
+    padding: 8px 16px;
+  }
+}
+
+/* ---------- Barre de navigation ---------- */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  height: 80px;
+}
+
+.logo img {
+  height: 73px;
+  width: auto;
+  display: block;
+}
+
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav a {
+  font-family: var(--font-nav);
+  font-weight: 700;
+  font-size: 13.5px;
+  text-transform: uppercase;
+  color: var(--text-color);
+  position: relative;
+  padding: 8px 0;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.main-nav a:hover {
+  color: var(--primary-color);
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+  width: 100%;
+}
+
+/* Page courante clairement signalée */
+.main-nav a.active {
+  color: var(--primary-color);
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Focus visible au clavier partout dans l'en-tête */
+.header a:focus-visible,
+.header button:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Bouton hamburger ---------- */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.burger-bar {
+  display: block;
+  width: 26px;
+  height: 2.5px;
+  margin: 0 auto;
+  border-radius: 2px;
+  background-color: var(--text-color);
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+.burger.is-open .burger-bar:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+
+.burger.is-open .burger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.is-open .burger-bar:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* ---------- Menu mobile ---------- */
+/* La visibilité est pilotée par la classe .is-open uniquement.
+   Ne jamais poser `display: block` sur .mobile-menu : cette règle
+   écrase le `display: none` natif de l'attribut [hidden] et le menu
+   reste alors déroulé en permanence sur mobile. */
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+  background: #ffffff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  border-top: 1px solid var(--border-color);
+  padding: 8px 20px 24px;
+}
+
+/* Uniquement sous le point de rupture mobile : au-dessus, la navigation
+   classique est affichée et ce panneau ne doit jamais apparaître. */
+@media (max-width: 992px) {
+  .mobile-menu.is-open {
+    display: block;
+  }
+}
+
+.mobile-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-menu li + li {
+  border-top: 1px solid var(--border-color);
+}
+
+.mobile-menu a {
+  display: block;
+  padding: 16px 4px; /* cible tactile confortable (>=48px) */
+  font-family: var(--font-nav);
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+.mobile-menu a.active {
+  color: var(--primary-color);
+}
+
+.mobile-menu-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 15px 24px;
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  top: var(--header-height);
+  background: rgba(0, 0, 0, 0.35);
+  z-index: -1;
+}
+
+/* ---------- Points de rupture ---------- */
+@media (max-width: 1180px) {
+  .main-nav ul { gap: 16px; }
+  .main-nav a { font-size: 12.5px; }
+}
+
+@media (max-width: 992px) {
+  .main-nav,
+  .header-actions {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .nav-container {
+    height: 68px;
+  }
+
+  .logo img {
+    height: 52px;
+  }
+}
+
+/* ---------- Bouton de retour en haut ---------- */
+/* Il ne s'affiche que lorsque l'en-tete est escamote : sans lui, une fois
+   l'en-tete parti, la navigation n'est plus accessible sans remonter
+   toute la page a la main. */
+.retour-haut {
+  position: fixed;
+  right: clamp(16px, 3vw, 28px);
+  bottom: clamp(16px, 3vw, 28px);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(46, 16, 101, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  z-index: 999;
+}
+
+.retour-haut.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.retour-haut:hover {
+  background: var(--primary-dark);
+}
+
+.retour-haut:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retour-haut {
+    transition: none;
+  }
+}

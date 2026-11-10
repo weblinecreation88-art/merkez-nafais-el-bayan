@@ -1,0 +1,554 @@
+/* =========================================================
+   Page d'accueil
+   ========================================================= */
+/* Ni overflow ni z-index ici : le confinement horizontal est porte par
+   <html>. Un overflow sur ce conteneur en ferait un contexte de
+   defilement, et les cartes en chevauchement passeraient alors
+   par-dessus l'en-tete fixe au lieu de glisser dessous. */
+.home-page {
+  position: relative;
+
+  /* Hauteur de la vague SVG entre deux sections. Sert aussi de base
+     au chevauchement des cartes : une seule valeur a ajuster. */
+  --divider-height: clamp(60px, 8vw, 110px);
+}
+
+.title-purple {
+  color: var(--primary-color);
+}
+
+.arabic-text {
+  font-family: var(--font-arabic);
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  color: var(--text-color);
+  line-height: 1.8;
+}
+
+.lead {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--light-text);
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.lead-muted {
+  color: var(--light-text);
+  font-size: 1.05rem;
+}
+
+.lead-white {
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  opacity: 0.92;
+}
+
+/* Sur fond sombre, tout le contenu doit rester blanc.
+   Les descendants sont ciblés explicitement (et .intro-text p aussi) :
+   sans cela, .intro-text p d'index.css, de spécificité égale mais
+   déclaré plus tard, repassait le texte en gris — illisible. */
+.text-white,
+.text-white h1,
+.text-white h2,
+.text-white h3,
+.text-white h4,
+.text-white p,
+.text-white li,
+.text-white em,
+.text-white strong,
+.text-white .intro-text p,
+.text-white .lead,
+.text-white .lead-muted {
+  color: var(--white);
+}
+
+/* Rythme vertical des sections */
+.aere-section {
+  padding-block: var(--section-gap);
+}
+
+/* Les blocs colorés reçoivent en plus une marge extérieure : le padding
+   seul est peint dans la couleur du bloc et ne produit donc aucune
+   respiration blanche entre deux sections. La marge, elle, laisse
+   apparaître le fond de page. */
+.aere-section-colored {
+  padding-block: calc(var(--section-gap) + 30px);
+  margin-block: clamp(40px, 6vw, 90px);
+}
+
+/* Le hero et le dernier bloc sont collés aux extrémités de la page :
+   pas de marge superflue en haut du premier ni en bas du dernier. */
+.home-page > .aere-section-colored:last-child {
+  margin-bottom: 0;
+}
+
+.purple-bg {
+  background-color: var(--secondary-color);
+}
+
+.pill-card {
+  padding: clamp(32px, 5vw, 64px) clamp(24px, 5vw, 72px);
+  border-radius: var(--radius-lg);
+  max-width: 1000px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-lg);
+}
+
+.pill-text {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.8;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* =========================================================
+   1. Hero
+   ========================================================= */
+.hero-identique {
+  position: relative;
+  width: 100%;
+  min-height: min(76vh, 700px);
+  padding: clamp(60px, 8vw, 100px) 20px clamp(140px, 18vw, 240px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section-bg.fill {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.section-bg.fill img.bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% 37%;
+}
+
+/* Voile sombre : sans lui, le texte blanc passe sur les zones claires
+   du dégradé et devient illisible (contraste insuffisant). */
+.hero-identique .section-bg.fill::after,
+.notre-mission .section-bg.fill::after,
+.equipe-competente .section-bg.fill::after,
+.tous-supports .section-bg.fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(30, 8, 52, 0.55), rgba(30, 8, 52, 0.4));
+}
+
+.section-content.relative {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 6.5vw, 4rem);
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero-cheikh {
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 3.2vw, 2rem);
+  color: var(--white);
+  margin-bottom: 1.75rem;
+  opacity: 0.95;
+}
+
+.hero-cheikh [lang='ar'] {
+  margin-inline-start: 8px;
+}
+
+.hero-baseline {
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--white);
+  max-width: 720px;
+  margin-inline: auto;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-lg {
+  min-height: 56px;
+  padding: 16px 34px;
+  font-size: 15px;
+}
+
+/* Bandeau de réassurance sous les boutons du hero */
+.hero-reassurance {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 28px;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  color: var(--white);
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.hero-reassurance li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-reassurance li::before {
+  content: '✓';
+  font-weight: 700;
+}
+
+/* =========================================================
+   Séparateurs de forme
+   ========================================================= */
+/* z-index volontairement bas : la vague doit rester DERRIÈRE les cartes
+   qui la chevauchent (.features-overlap-container, z-index 3). Avec la
+   valeur précédente (10), elle passait par-dessus et les coupait. */
+.ux-shape-divider {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.ux-shape-divider svg {
+  display: block;
+  width: 100%;
+  height: var(--divider-height);
+}
+
+.ux-shape-fill {
+  fill: var(--bg-color);
+}
+
+/* =========================================================
+   2. Les quatre pôles (cartes en chevauchement)
+   ========================================================= */
+/* Les cartes chevauchent légèrement le bas du hero.
+   La remontée doit rester INFÉRIEURE à la hauteur du séparateur SVG
+   (--divider-height), sinon les cartes passent derrière la vague et
+   se retrouvent coupées. On remonte donc d'une fraction de cette
+   hauteur, calculée sur la même base : les deux restent solidaires. */
+.features-overlap-container {
+  position: relative;
+  z-index: 3;
+  margin-top: calc(var(--divider-height) * -0.45);
+  padding-bottom: var(--section-gap);
+}
+
+.features-overlap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: clamp(18px, 2.5vw, 30px);
+}
+
+/* Cartes entièrement cliquables : avant, seules les images étaient
+   affichées et rien n'était cliquable. */
+.overlap-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 32px 24px 28px;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  color: inherit;
+  height: 100%;
+}
+
+.overlap-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  color: inherit;
+}
+
+/* Les icônes d'origine sont très hautes (418x941) et contiennent
+   beaucoup de vide au-dessus et en dessous du cercle. On recadre sur
+   la partie utile plutôt que de les afficher en entier, sinon le
+   dessin apparaît minuscule au centre d'une grande zone vide. */
+.feature-image-small {
+  height: 120px;
+  width: 120px;
+  margin: 0 auto 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-image-small img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transform: scale(1.12);
+}
+
+.feature-title {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+}
+
+.feature-text {
+  font-size: 0.93rem;
+  color: var(--light-text);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+.feature-link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--primary-color);
+}
+
+.overlap-card:hover .feature-link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* =========================================================
+   3. Bienvenue
+   ========================================================= */
+.bienvenue-image-wrapper {
+  margin: 0 auto;
+  width: min(320px, 60%);
+}
+
+/* =========================================================
+   5. Notre mission
+   ========================================================= */
+.notre-mission,
+.equipe-competente,
+.tous-supports {
+  position: relative;
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: clamp(24px, 3vw, 40px);
+  text-align: left;
+}
+
+.mission-item {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-md);
+  padding: clamp(24px, 3vw, 34px);
+  backdrop-filter: blur(4px);
+}
+
+.mission-item h3 {
+  color: var(--white);
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.mission-item p {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   7 & 11. Cartes « Le Merkez propose » / « Tu pourras »
+   ========================================================= */
+.merkez-propose,
+.avec-merkez {
+  position: relative;
+  background: linear-gradient(160deg, #6f4f96, #4a1d68);
+}
+
+.propose-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: clamp(24px, 3vw, 40px);
+}
+
+.propose-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: clamp(28px, 4vw, 44px);
+  box-shadow: var(--shadow-lg);
+}
+
+.propose-card h3 {
+  font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+  margin-bottom: 1.25rem;
+}
+
+.propose-card > p {
+  color: var(--light-text);
+}
+
+.propose-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.propose-list li {
+  position: relative;
+  margin-bottom: 12px;
+  padding-left: 20px;
+  color: var(--light-text);
+  line-height: 1.7;
+}
+
+.propose-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+}
+
+.propose-cta {
+  margin-top: auto;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.propose-cta:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Hadiths cités dans les cartes */
+.hadith {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.hadith cite {
+  font-size: 0.85rem;
+  margin-top: 0.6rem;
+}
+
+/* =========================================================
+   12. Sessions du Cheikh
+   ========================================================= */
+.sessions-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(32px, 5vw, 70px);
+  align-items: center;
+}
+
+.sessions-image img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.info-box {
+  background: var(--bg-alt);
+  border-left: 4px solid var(--secondary-color);
+  border-radius: var(--radius-sm);
+  padding: clamp(20px, 3vw, 32px);
+}
+
+.info-box h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.info-box p {
+  color: var(--light-text);
+  font-size: 0.98rem;
+}
+
+.info-box a {
+  font-weight: 700;
+  word-break: break-word;
+}
+
+/* =========================================================
+   13. Appel à l'action final
+   ========================================================= */
+.supports-mockup img {
+  width: 100%;
+  max-width: 760px;
+}
+
+.support-note {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.support-note a {
+  color: var(--white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 700;
+}
+
+.support-note a:hover {
+  color: var(--white);
+  opacity: 0.8;
+}
+
+/* =========================================================
+   Points de rupture
+   ========================================================= */
+@media (max-width: 991px) {
+  .sessions-grid {
+    grid-template-columns: 1fr;
+  }
+  .sessions-image {
+    order: -1;
+  }
+  .mission-grid {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-identique {
+    min-height: auto;
+    padding-bottom: clamp(110px, 22vw, 160px);
+  }
+  .hero-reassurance {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .propose-list,
+  .hadith {
+    text-align: left;
+  }
+}

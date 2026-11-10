@@ -1,0 +1,57 @@
+.arabic-header {
+  background: linear-gradient(135deg, #4a1d68, #8b3a7d);
+}
+
+.curriculum-block {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+  border: 1px solid var(--border-color);
+}
+
+.section-title {
+  display: block;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
+  color: var(--primary-color);
+  font-size: clamp(1.35rem, 2.8vw, 1.8rem);
+}
+
+/* Le trait est porte par un pseudo-element centre, au lieu du couple
+   left:50% + translateX(-50%) qui provoquait un debordement horizontal. */
+.section-title::after {
+  content: '';
+  display: block;
+  width: 90px;
+  height: 2px;
+  margin: 0.75rem auto 0;
+  background: var(--border-color);
+}
+
+.curriculum-card {
+  background: #f8fafc;
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 4px solid var(--secondary-color);
+  transition: transform 0.3s ease;
+}
+
+.curriculum-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.arabic-level {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  font-family: 'Amiri', serif;
+}
+
+.curriculum-card h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}

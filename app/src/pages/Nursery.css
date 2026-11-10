@@ -1,0 +1,58 @@
+.nursery-header {
+  background: linear-gradient(135deg, #7b3f9d, #b06aa6);
+}
+
+.header-tagline {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.subjects-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.tag {
+  background: #fffbeb;
+  color: #b45309;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 1px solid #fde68a;
+}
+
+.nursery-level {
+  position: relative;
+  padding-top: 50px;
+}
+
+.level-badge {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 50px;
+  background: var(--primary-color);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border: 4px solid white;
+}
+
+/* Etiquettes de matieres : remises dans la charte violette */
+.tag {
+  background: var(--bg-alt);
+  color: var(--primary-color);
+  border: 1px solid var(--border-color);
+}
