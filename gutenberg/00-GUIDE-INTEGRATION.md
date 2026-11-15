@@ -94,7 +94,7 @@ Il s'affiche **deux fois** sur la page actuelle. À n'afficher qu'une seule fois
 
 | Élément | Valeur |
 |---|---|
-| Inscription **femme** | +33 7 49 54 28 46 |
+| Inscription **femme** | +212 6 48 94 59 06 |
 | Inscription **homme** | +262 693 13 64 67 |
 | Questions au Cheikh (Telegram, arabe) | +20 128 483 7286 |
 | Institut du Cheikh en ligne | https://t.me/ibnAbdelaziz |

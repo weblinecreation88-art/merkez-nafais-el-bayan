@@ -5,8 +5,8 @@ import Seo from '../components/Seo';
 const CONTACTS = [
   {
     titre: 'Inscriptions femmes et enfants',
-    numero: '+33 7 49 54 28 46',
-    lien: 'https://wa.me/33749542846',
+    numero: '+212 6 48 94 59 06',
+    lien: 'https://wa.me/212648945906',
     note: 'WhatsApp — inscriptions, questions sur les cours et les tarifs.',
   },
   {

@@ -7,7 +7,7 @@ import Seo from '../components/Seo';
    de backend, on compose un message WhatsApp pré-rempli — le canal que le
    centre utilise déjà pour les inscriptions. */
 const WHATSAPP = {
-  femme: '33749542846',
+  femme: '212648945906',
   homme: '262693136467',
 };
 

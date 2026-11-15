@@ -78,7 +78,7 @@ const Nursery = () => {
           
           <div className="hero-buttons mt-4">
             <Link to="/inscription-et-tarifs" className="btn">Je m'inscris</Link>
-            <a href="tel:+33749542846" className="btn btn-outline">Nous contacter</a>
+            <a href="https://wa.me/212648945906" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Nous contacter</a>
           </div>
         </section>
       </div>

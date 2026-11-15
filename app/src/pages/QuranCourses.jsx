@@ -126,8 +126,8 @@ const QuranCourses = () => {
           </p>
           
           <div className="hero-buttons mt-4">
-            <a href="tel:+33749542846" className="btn">Inscription femme</a>
-            <a href="tel:+262693136467" className="btn btn-outline">Inscription homme</a>
+            <a href="https://wa.me/212648945906" target="_blank" rel="noopener noreferrer" className="btn">Inscription femme</a>
+            <a href="https://wa.me/262693136467" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Inscription homme</a>
           </div>
         </section>
       </div>

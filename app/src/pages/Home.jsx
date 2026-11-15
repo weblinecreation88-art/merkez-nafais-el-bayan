@@ -21,7 +21,7 @@ const SCHEMA_ORGANISME = {
   contactPoint: [
     {
       '@type': 'ContactPoint',
-      telephone: '+33749542846',
+      telephone: '+212648945906',
       contactType: 'Inscriptions femmes et enfants',
       availableLanguage: ['fr', 'ar'],
     },
@@ -548,7 +548,7 @@ const Home = () => {
           <h3 className="text-white">Prêt à commencer&nbsp;? Le premier cours est offert.</h3>
 
           <div className="support-buttons mt-5">
-            <a href="https://wa.me/33749542846" className="btn btn-secondary btn-lg">
+            <a href="https://wa.me/212648945906" className="btn btn-secondary btn-lg">
               Inscription femmes
             </a>
             <a href="https://wa.me/262693136467" className="btn btn-secondary btn-lg">

@@ -158,7 +158,7 @@ const Header = () => {
           <Link to="/inscription-et-tarifs" className="btn btn-block">
             S'inscrire — 1er cours offert
           </Link>
-          <a href="https://wa.me/33749542846" className="btn btn-outline btn-block">
+          <a href="https://wa.me/212648945906" className="btn btn-outline btn-block">
             WhatsApp femmes
           </a>
           <a href="https://wa.me/262693136467" className="btn btn-outline btn-block">

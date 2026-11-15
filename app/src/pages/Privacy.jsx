@@ -81,7 +81,7 @@ const Privacy = () => {
           <ul className="contact-list">
             <li>
               Inscriptions femmes&nbsp;:{' '}
-              <a href="https://wa.me/33749542846">+33 7 49 54 28 46</a>
+              <a href="https://wa.me/212648945906">+212 6 48 94 59 06</a>
             </li>
             <li>
               Inscriptions hommes&nbsp;:{' '}
